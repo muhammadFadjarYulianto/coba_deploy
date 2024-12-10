@@ -1,12 +1,17 @@
 from app import app, response
 from app.controller import AdminsController, CategoriesController, ProductsController, ArticlesController, CommentsController
-from flask import request
+from flask import request, send_from_directory
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.controller.ProductsController import Products, format_array
 
 @app.route('/')
 def index():
-    return 'Hello Flask App'
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Rute untuk file statis lainnya
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory(app.static_folder, path)
 
 @app.route('/api/login', methods=['POST'])
 def loginAdmin():

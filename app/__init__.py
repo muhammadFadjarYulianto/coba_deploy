@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../static')
 app.config.from_object(Config)
 CORS(app, resources={
     r"/api/*": {
